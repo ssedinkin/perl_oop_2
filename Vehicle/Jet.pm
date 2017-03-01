@@ -23,15 +23,15 @@ sub BUILD {
 };
 
 sub moving {
-	my $self = shift;
-	my $check_move = shift;
-	unless ( $self->is_dead ) {
-	    if ($check_move =~ /fly/ ) {
-	    	print "Самолет летит\n";
-	    }
-	    else {
-	    	$self->DEMOLISH;
-	    };}
+    my $self = shift;
+    my $check_move = shift;
+    unless ( $self->is_dead ) {
+        if ($check_move =~ /fly/ ) {
+            print "Самолет летит\n";
+        }
+        else {
+            $self->DEMOLISH;
+        };}
     return;
 }
 

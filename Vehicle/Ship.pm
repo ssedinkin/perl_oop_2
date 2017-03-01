@@ -18,20 +18,20 @@ has 'torpedo' => (
 );
 
 sub BUILD {
-	print "Корабль создан и отплыл\n";
-	return;
+    print "Корабль создан и отплыл\n";
+    return;
 };
 
 sub moving {
-	my $self = shift;
-	my $check_move = shift;
-	unless ( $self->is_dead ) {
-	    if ($check_move =~ /swim/ ) {
-	    	print "Корабль плывет\n";
-	    }
-	    else {
-	    	$self->DEMOLISH;
-	    };}
+    my $self = shift;
+    my $check_move = shift;
+    unless ( $self->is_dead ) {
+        if ($check_move =~ /swim/ ) {
+            print "Корабль плывет\n";
+        }
+        else {
+            $self->DEMOLISH;
+        };}
     return;
 }
 

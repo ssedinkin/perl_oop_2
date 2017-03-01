@@ -23,15 +23,15 @@ sub BUILD {
 };
 
 sub moving {
-	my $self = shift;
-	my $check_move = shift;
-	unless ( $self->is_dead ) {
-	    if ($check_move =~ /tank_go/ ) {
-	    	print "Танк едет\n";
-	    }
-	    else {
-	    	$self->DEMOLISH;
-	    };}
+    my $self = shift;
+    my $check_move = shift;
+    unless ( $self->is_dead ) {
+        if ($check_move =~ /tank_go/ ) {
+            print "Танк едет\n";
+        }
+        else {
+            $self->DEMOLISH;
+        };}
     return;
 }
 
