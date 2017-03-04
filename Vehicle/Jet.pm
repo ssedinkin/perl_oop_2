@@ -1,20 +1,24 @@
+# Класс авиационная техника
 package Vehicle::Jet;
  
 use Moose;
+
+use Guns::MashineGun;
+use Guns::Rocket;
 
 
 extends 'Vehicle';
 
 has 'mashine_gun' => (
     is  => 'ro',
-    isa => 'Mashine_gun',
-    handles => { shut_mashine_gun => 'shut' },
+    isa => 'MashineGun',
+    handles => { shoot_mashine_gun => 'shoot' },
 );
 
 has 'rocket' => (
     is  => 'ro',
     isa => 'Rocket',
-    handles => { shut_rocket => 'shut' },
+    handles => { shoot_rocket => 'shoot' },
 );
 
 sub BUILD {
@@ -22,17 +26,31 @@ sub BUILD {
     return;
 };
 
-sub moving {
+sub move {
     my $self = shift;
-    my $check_move = shift;
-    unless ( $self->is_dead ) {
-        if ($check_move =~ /fly/ ) {
-            print "Самолет летит\n";
-        }
-        else {
-            $self->DEMOLISH;
-        };}
-    return;
+
+    return $self->fly;
+}
+
+sub swim {
+    my $self = shift;
+
+    print "Самолет утонул\n";
+    return $self->kill_object;
+}
+
+sub tank_go {
+    my $self = shift;
+
+    print "Самолет разбился\n";
+    return $self->kill_object;
+}
+
+sub art_go {
+    my $self = shift;
+    
+    print "Самолет развалился\n";
+    return $self->kill_object;
 }
 
 1;

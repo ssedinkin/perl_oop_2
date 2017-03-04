@@ -1,20 +1,25 @@
+# Класс танковая техника
 package Vehicle::Tank;
  
 use Moose;
+
+use Guns::BigGun;
+use Guns::MashineGun;
+
 
 
 extends 'Vehicle';
 
 has 'big_gun' => (
     is  => 'ro',
-    isa => 'Big_gun',
-    handles => { shut_big_gun => 'shut' },
+    isa => 'BigGun',
+    handles => { shoot_big_gun => 'shoot' },
 );
 
 has 'mashine_gun' => (
     is  => 'ro',
-    isa => 'Mashine_gun',
-    handles => { shut_mashine_gun => 'shut' },
+    isa => 'MashineGun',
+    handles => { shoot_mashine_gun => 'shoot' },
 );
 
 sub BUILD {
@@ -22,17 +27,31 @@ sub BUILD {
     return;
 };
 
-sub moving {
+sub move {
     my $self = shift;
-    my $check_move = shift;
-    unless ( $self->is_dead ) {
-        if ($check_move =~ /tank_go/ ) {
-            print "Танк едет\n";
-        }
-        else {
-            $self->DEMOLISH;
-        };}
-    return;
+
+    return $self->tank_go;
+}
+
+sub fly {
+    my $self = shift;
+
+    print "Танк упал с высоты\n";
+    return $self->kill_object;
+}
+
+sub swim {
+    my $self = shift;
+
+    print "Танк утонул\n";
+    return $self->kill_object;
+}
+
+sub art_go {
+    my $self = shift;
+    
+    print "Танк развалился\n";
+    return $self->kill_object;
 }
 
 1;

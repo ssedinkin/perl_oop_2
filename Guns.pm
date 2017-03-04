@@ -1,3 +1,4 @@
+# Класс оружие
 package Guns;
  
 use Moose;
@@ -12,8 +13,9 @@ has 'bullets_count' => (
     isa => 'Int',
 );
 
-sub shut {
+sub shoot {
     my $self = shift;
+    
     if ( $self->bullets_count == 0 ) {
         print "Нет патронов\n";
     }
@@ -24,7 +26,7 @@ sub shut {
     return;
 }
 
-sub sniper {
+sub aim {
     print "Прицелился\n";
     return;
 }

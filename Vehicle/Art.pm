@@ -1,14 +1,18 @@
+# Класс артиллерийская техника
 package Vehicle::Art;
  
 use Moose;
+
+use Guns::BigGun;
+
 
 
 extends 'Vehicle';
 
 has 'big_gun' => (
     is  => 'ro',
-    isa => 'Big_gun',
-    handles => { shut_big_gun => 'shut' },
+    isa => 'BigGun',
+    handles => { shoot_big_gun => 'shoot' },
 );
 
 sub BUILD {
@@ -16,18 +20,31 @@ sub BUILD {
     return;
 };
 
-sub moving {
+sub move {
     my $self = shift;
-    my $check_move = shift;
-    unless ( $self->is_dead ) {
-        if ($check_move =~ /art_go/ ) {
-            print "Артиллерия движется\n";
-        }
-        else {
-            $self->DEMOLISH;
-        };
-    }
-    return;
+
+    return $self->art_go;
+}
+
+sub swim {
+    my $self = shift;
+
+    print "Артиллерия утонула\n";
+    return $self->kill_object;
+}
+
+sub fly {
+    my $self = shift;
+
+    print "Артиллерия упала с высоты\n";
+    return $self->kill_object;
+}
+
+sub tank_go {
+    my $self = shift;
+    
+    print "Артиллерия развалилась\n";
+    return $self->kill_object;
 }
 
 1;

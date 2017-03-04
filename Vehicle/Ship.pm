@@ -1,20 +1,25 @@
+# Класс корабельная техника
 package Vehicle::Ship;
  
 use Moose;
+
+use Guns::BigGun;
+use Guns::Torpedo;
+
 
 
 extends 'Vehicle';
 
 has 'big_gun' => (
     is  => 'ro',
-    isa => 'Big_gun',
-    handles => { shut_big_gun => 'shut' },
+    isa => 'BigGun',
+    handles => { shoot_big_gun => 'shoot' },
 );
 
 has 'torpedo' => (
     is  => 'ro',
     isa => 'Torpedo',
-    handles => { shut_torpedo => 'shut' },
+    handles => { shoot_torpedo => 'shoot' },
 );
 
 sub BUILD {
@@ -22,17 +27,32 @@ sub BUILD {
     return;
 };
 
-sub moving {
+
+sub move {
     my $self = shift;
-    my $check_move = shift;
-    unless ( $self->is_dead ) {
-        if ($check_move =~ /swim/ ) {
-            print "Корабль плывет\n";
-        }
-        else {
-            $self->DEMOLISH;
-        };}
-    return;
+
+    return $self->swim;
+}
+
+sub fly {
+    my $self = shift;
+
+    print "Корабль упал с высоты\n";
+    return $self->kill_object;
+}
+
+sub tank_go {
+    my $self = shift;
+
+    print "Корабль разбился\n";
+    return $self->kill_object;
+}
+
+sub art_go {
+    my $self = shift;
+    
+    print "Корабль развалился\n";
+    return $self->kill_object;
 }
 
 1;

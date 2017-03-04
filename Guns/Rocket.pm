@@ -1,3 +1,4 @@
+# Класс ракеты
 package Rocket;
 
 use Moose;

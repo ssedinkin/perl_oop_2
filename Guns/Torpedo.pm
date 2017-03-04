@@ -1,3 +1,4 @@
+# Класс торпеды
 package Torpedo;
 
 use Moose;

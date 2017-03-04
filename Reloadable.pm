@@ -1,34 +1,16 @@
-package Mashine_gun;
+# Класс перезаряжаемые
+package Reloadable;
 
 use Moose;
 
 
 extends 'Guns';
 
-has 'bullets_in_mag_count' => (
-    is  => 'rw',
-    isa => 'Int',
-);
-
-has 'bullets_in_mag_now' => (
-    is  => 'rw',
-    isa => 'Int',
-);
-
-sub BUILD {
+sub shoot {
     my $self = shift;
-    $self->reload;
-}
 
-sub shut {
-    my $self = shift;
     if ( $self->bullets_in_mag_now == 0 ) {
-        if ( $self->bullets_count > 0 ) {
-            $self->reload;
-        }
-        else {
-            print "Нет патронов\n";
-        }
+        print "Нет патронов\n";
     }
     else {
         $self->bullets_in_mag_now ( $self->bullets_in_mag_now - 1 );
@@ -37,9 +19,24 @@ sub shut {
     return;
 }
 
+after 'shoot' => sub {
+    my $self = shift;
+
+    if ( $self->bullets_in_mag_now == 0 ) {
+        if ( $self->bullets_count > 0 ) {
+            $self->reload;
+        }
+        else {
+            print "Нет патронов\n";
+        }
+    }
+        return;
+};
+
 sub reload {
     my $self = shift;
-    if ( ($self->bullets_count - $self->bullets_in_mag_count) > 0 ){
+    
+    if ( ($self->bullets_count - $self->bullets_in_mag_count) >= 0 ){
         $self->bullets_in_mag_now ($self->bullets_in_mag_count);
         $self->bullets_count ($self->bullets_count - $self->bullets_in_mag_count);
         print "Перезарядка полным магазином\n";
@@ -49,8 +46,6 @@ sub reload {
         $self->bullets_count (0);
         print "Перезарядка неполным магазином\n";
     }
-
-    
 }
 
 1;
