@@ -13,13 +13,11 @@ extends 'Vehicle';
 has 'big_gun' => (
     is  => 'ro',
     isa => 'BigGun',
-    handles => { shoot_big_gun => 'shoot' },
 );
 
 has 'torpedo' => (
     is  => 'ro',
     isa => 'Torpedo',
-    handles => { shoot_torpedo => 'shoot' },
 );
 
 sub BUILD {
@@ -27,6 +25,31 @@ sub BUILD {
     return;
 };
 
+sub shoot_big_gun {
+    my $self = shift;
+
+    if ( $self->is_dead ) {
+        print "Корабль мертв, стрелять из пушки невозможно\n";
+        return 0;
+    }
+    else {
+        $self->big_gun->shoot_big_gun;
+        return 1;
+    }
+}
+
+sub shoot_torpedo {
+    my $self = shift;
+
+    if ( $self->is_dead ) {
+        print "Корабль мертв, стрелять торпедами невозможно\n";
+        return 0;
+    }
+    else {
+        $self->torpedo->shoot_torpedo;
+        return 1;
+    }
+}
 
 sub move {
     my $self = shift;
