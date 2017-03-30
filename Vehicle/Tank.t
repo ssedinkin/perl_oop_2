@@ -38,8 +38,10 @@ is( $tank_unit->speed, 100, 'Скорость корректна' );
 is( $tank_unit->thickness, 34, 'Броня корректна' );
 is( $tank_unit->life, 1000, 'Количество жизней корректно' );
 is( $tank_unit->is_dead, 0, 'Объект не мертв' );
+is( $tank_unit->is_prepared, 1, 'Танк создан и выехал' );
 
 can_ok( $tank_unit, 'BUILD' );
+can_ok( $tank_unit, 'prepare' );
 can_ok( $tank_unit, 'move' );
 can_ok( $tank_unit, 'fly' );
 can_ok( $tank_unit, 'swim' );

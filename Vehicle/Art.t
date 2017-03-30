@@ -33,8 +33,10 @@ is( $art_unit->speed, 60, 'Скорость корректна' );
 is( $art_unit->thickness, 800, 'Броня корректна' );
 is( $art_unit->life, 9874, 'Количество жизней корректно' );
 is( $art_unit->is_dead, 0, 'Объект не мертв' );
+is( $art_unit->is_prepared, 1, 'Артиллерия создана и заняла позицию' );
 
 can_ok( $art_unit, 'BUILD' );
+can_ok( $art_unit, 'prepare' );
 can_ok( $art_unit, 'move' );
 can_ok( $art_unit, 'fly' );
 can_ok( $art_unit, 'swim' );

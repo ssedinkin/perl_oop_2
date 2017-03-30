@@ -21,8 +21,15 @@ has 'torpedo' => (
 );
 
 sub BUILD {
-    print "Корабль создан и отплыл\n";
-    return;
+    my ( $self ) = @_;
+    $self->prepare;
+    if ( $self->is_prepared ) {
+        print "Корабль создан и отплыл\n";
+        return 1;
+    }
+    else {
+        return 0;
+    }
 };
 
 sub shoot_big_gun {

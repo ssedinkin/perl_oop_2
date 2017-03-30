@@ -37,8 +37,10 @@ is( $ship_unit->speed, 10000, 'Скорость корректна' );
 is( $ship_unit->thickness, 1000, 'Броня корректна' );
 is( $ship_unit->life, 666666, 'Количество жизней корректно' );
 is( $ship_unit->is_dead, 0, 'Объект не мертв' );
+is( $ship_unit->is_prepared, 1, 'Корабль создан и отплыл' );
 
 can_ok( $ship_unit, 'BUILD' );
+can_ok( $ship_unit, 'prepare' );
 can_ok( $ship_unit, 'move' );
 can_ok( $ship_unit, 'fly' );
 can_ok( $ship_unit, 'swim' );

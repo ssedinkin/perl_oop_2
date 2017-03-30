@@ -21,8 +21,15 @@ has 'mashine_gun' => (
 );
 
 sub BUILD {
-    print "Танк создан и выехал\n";
-    return;
+    my ( $self ) = @_;
+    $self->prepare;
+    if ( $self->is_prepared ) {
+        print "Танк создан и выехал\n";
+        return 1;
+    }
+    else {
+        return 0;
+    }
 };
 
 sub shoot_big_gun {

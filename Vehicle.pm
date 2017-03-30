@@ -30,8 +30,32 @@ has 'is_dead' => (
     default => '0',
 );
 
+has 'is_prepared' => (
+    is  => 'rw',
+    isa => 'Bool',
+);
+
 sub BUILD {
-    return;
+    my ( $self ) = @_;
+    $self->prepare;
+    if ( $self->is_prepared ) {
+        print "Техника подготовлена\n";
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+sub prepare {
+    my ( $self ) = @_;
+    if ( !$self->is_prepared ) {
+        $self->is_prepared(1);
+        return 1;
+    }
+    else {
+        return 0;
+    }
 }
 
 sub get_strike {

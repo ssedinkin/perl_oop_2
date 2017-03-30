@@ -15,8 +15,15 @@ has 'big_gun' => (
 );
 
 sub BUILD {
-    print "Артиллерия создана и заняла позицию\n";
-    return;
+    my ( $self ) = @_;
+    $self->prepare;
+    if ( $self->is_prepared ) {
+        print "Артиллерия создана и заняла позицию\n";
+        return 1;
+    }
+    else {
+        return 0;
+    }
 };
 
 sub shoot_big_gun {

@@ -20,8 +20,15 @@ has 'rocket' => (
 );
 
 sub BUILD {
-    print "Самолет создан и взлетел\n";
-    return;
+    my ( $self ) = @_;
+    $self->prepare;
+    if ( $self->is_prepared ) {
+        print "Самолет создан и взлетел\n";
+        return 1;
+    }
+    else {
+        return 0;
+    }
 };
 
 sub shoot_mashine_gun {

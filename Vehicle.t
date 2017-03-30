@@ -24,8 +24,10 @@ is( $unknown_unit_2->speed, 100, 'Скорость 100, корректна' );
 is( $unknown_unit_2->thickness, 50, 'Броня 50, корректна' );
 is( $unknown_unit_2->life, 300, 'Количество жизней 300, корректно' );
 is( $unknown_unit_2->is_dead, 0, 'Объект не мертв' );
+is( $unknown_unit_2->is_prepared, 1, 'Объект подготовлен' );
 
 can_ok( $unknown_unit_2, 'BUILD' );
+can_ok( $unknown_unit_2, 'prepare' );
 can_ok( $unknown_unit_2, 'move' );
 can_ok( $unknown_unit_2, 'fly' );
 can_ok( $unknown_unit_2, 'swim' );
@@ -34,6 +36,8 @@ can_ok( $unknown_unit_2, 'tank_go' );
 can_ok( $unknown_unit_2, 'get_strike' );
 can_ok( $unknown_unit_2, 'is_critical_damage' );
 can_ok( $unknown_unit_2, 'kill_object' );
+
+is( $unknown_unit_2->prepare, 0, 'Объект уже подготовлен' );
 
 $unknown_unit_2->get_strike(50, 1);
 is( $unknown_unit_2->life, 250, 'Объект получил 50 урона. Количество жизней изменилось с 300 до 250' );

@@ -37,8 +37,10 @@ is( $jet_unit->speed, 10000, 'Скорость 10000, корректна' );
 is( $jet_unit->thickness, 23, 'Броня 23, корректна' );
 is( $jet_unit->life, 500, 'Количество жизней 500, корректно' );
 is( $jet_unit->is_dead, 0, 'Объект не мертв' );
+is( $jet_unit->is_prepared, 1, 'Самолет создан и взлетел' );
 
 can_ok( $jet_unit, 'BUILD' );
+can_ok( $jet_unit, 'prepare' );
 can_ok( $jet_unit, 'move' );
 can_ok( $jet_unit, 'fly' );
 can_ok( $jet_unit, 'swim' );
