@@ -6,21 +6,9 @@ use Moose;
 
 extends 'Reloadable';
 
-has 'bullets_in_mag_count' => (
-    is  => 'rw',
-    isa => 'Int',
-    default=>'1',
-);
-
-has 'bullets_in_mag_now' => (
-    is  => 'rw',
-    isa => 'Int',
-);
-
-sub BUILD {
-    my $self = shift;
-    
-    $self->reload;
+sub shoot_big_gun {
+    my ( $self ) = @_;
+    $self->shoot;
 }
 
 1;
