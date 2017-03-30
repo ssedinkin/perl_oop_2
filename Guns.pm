@@ -11,6 +11,7 @@ has 'type' => (
 has 'bullets_count' => (
     is  => 'rw',
     isa => 'Int',
+    default => 10,
 );
 
 sub shoot {
@@ -18,17 +19,18 @@ sub shoot {
     
     if ( $self->bullets_count == 0 ) {
         print "Нет патронов\n";
+        return 0;
     }
     else {
         $self->bullets_count ( $self->bullets_count - 1 );
         print "Выстрелил\n";
+        return 1;
     }
-    return;
 }
 
 sub aim {
     print "Прицелился\n";
-    return;
+    return 1;
 }
 
 1;

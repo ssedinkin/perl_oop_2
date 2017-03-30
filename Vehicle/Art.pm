@@ -12,13 +12,32 @@ extends 'Vehicle';
 has 'big_gun' => (
     is  => 'ro',
     isa => 'BigGun',
-    handles => { shoot_big_gun => 'shoot' },
 );
 
 sub BUILD {
-    print "Артиллерия создана и заняла позицию\n";
-    return;
+    my ( $self ) = @_;
+    $self->prepare;
+    if ( $self->is_prepared ) {
+        print "Артиллерия создана и заняла позицию\n";
+        return 1;
+    }
+    else {
+        return 0;
+    }
 };
+
+sub shoot_big_gun {
+    my $self = shift;
+
+    if ( $self->is_dead ) {
+        print "Артиллерия мертва, стрелять из пушки невозможно\n";
+        return 0;
+    }
+    else {
+        $self->big_gun->shoot_big_gun;
+        return 1;
+    }
+}
 
 sub move {
     my $self = shift;
